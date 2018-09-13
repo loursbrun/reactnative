@@ -1,22 +1,28 @@
 // Components/FilmItem.js
 
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 class FilmItem extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
-        <View name="left_container" style={styles.left_container}>
-            <View name="image_container" style={styles.image_container}></View>
-        </View>
-        <View name="right_container" style={styles.right_container}>
-             <View name="title_top_container" style={styles.title_top_container}>
-                <View name="title_left_container" style={styles.title_left_container}><Text name="title_text" style={styles.title_text}>Titre du film</Text></View>
-                <View name="note_right_container" style={styles.note_right_container}><Text name="vote_text" style={styles.vote_text}>Vote</Text></View>
-             </View>
-             <View name="description_container" style={styles.description_container}><Text name="description_text" style={styles.description_text}>Description</Text></View>
-             <View name="date_bottom_container" style={styles.date_bottom_container}><Text name="date_text" style={styles.date_bottom_container}>Sortie le 00/00/00</Text></View>
+        <Image
+          style={styles.image}
+          source={{uri: "image"}}
+        />
+        <View style={styles.content_container}>
+          <View style={styles.header_container}>
+            <Text style={styles.title_text}>Titre du film</Text>
+            <Text style={styles.vote_text}>Vote</Text>
+          </View>
+          <View style={styles.description_container}>
+            <Text style={styles.description_text} numberOfLines={6}>Description</Text>
+            {/* La propriété numberOfLines permet de couper un texte si celui-ci est trop long, il suffit de définir un nombre maximum de ligne */}
+          </View>
+          <View style={styles.date_container}>
+            <Text style={styles.date_text}>Sorti le 00/00/0000</Text>
+          </View>
         </View>
       </View>
     )
@@ -25,66 +31,48 @@ class FilmItem extends React.Component {
 
 const styles = StyleSheet.create({
   main_container: {
-    height: 200,
-    backgroundColor: 'grey',
-    marginBottom: 20,
+    height: 190,
     flexDirection: 'row'
   },
-  left_container: {
-    backgroundColor: 'green', 
-    flex:1
+  image: {
+    width: 120,
+    height: 180,
+    margin: 5,
+    backgroundColor: 'gray'
   },
-  image_container: {
-    backgroundColor: 'blue', 
-    flex:1, 
-    margin:10
+  content_container: {
+    flex: 1,
+    margin: 5
   },
-  right_container: {
-    backgroundColor: 'red', 
-    flex:2, 
-    margin: 10
-  },
-  title_top_container:{
-    backgroundColor: 'grey', 
-    flex:1, 
+  header_container: {
+    flex: 3,
     flexDirection: 'row'
-  },
-  title_left_container: {
-    backgroundColor: 'yellow', 
-    flex:2
   },
   title_text: {
-    fontSize: 20, 
-    fontWeight: '600'
-  },
-  note_right_container:{
-    backgroundColor: 'orange', 
-    flex:1
+    fontWeight: 'bold',
+    fontSize: 20,
+    flex: 1,
+    flexWrap: 'wrap',
+    paddingRight: 5
   },
   vote_text: {
-    fontSize: 30, 
-    fontWeight: '600', 
-    textAlign: 'right'
+    fontWeight: 'bold',
+    fontSize: 26,
+    color: '#666666'
   },
   description_container: {
-    backgroundColor: 'pink', 
-    flex:3
+    flex: 7
   },
   description_text: {
-    fontStyle:'italic'
+    fontStyle: 'italic',
+    color: '#666666'
   },
-  date_bottom_container: {
-    backgroundColor: 'brown', 
-    flex:1
+  date_container: {
+    flex: 1
   },
-  date_text :{
-    fontSize: 14, 
-    fontWeight: '600', 
-    flexDirection:'column',  
-    backgroundColor:'red', 
-    position:'absolute', 
-    bottom: 0, 
-    right: 0
+  date_text: {
+    textAlign: 'right',
+    fontSize: 14
   }
 })
 
