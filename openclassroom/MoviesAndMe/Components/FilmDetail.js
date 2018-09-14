@@ -27,7 +27,14 @@ class FilmDetail extends React.Component {
         if (film != undefined) {
             return (
                 <ScrollView style={styles.scrollview_container}>
-                    <Text>{film.title}</Text>
+               <View style={ styles.image_container }></View>
+                    <Text style={ styles.title_container }>{film.title}</Text>
+                    <Text style={ styles.description_container }>Description description description description description description description description description description description </Text>
+                    <Text style={ styles.informations_container }>Sortie le 25/05/1977</Text>
+                    <Text style={ styles.informations_container }>Note : 8.1/10</Text>
+                    <Text style={ styles.informations_container }>Nombre de votes: 8848</Text>
+                    <Text style={ styles.informations_container }>Budget: 11,000,000 $</Text>
+                    <Text style={ styles.informations_container }>Genre(s) : Aventure / Action / Science-Fiction</Text>
                 </ScrollView>
             )
         }
@@ -70,6 +77,33 @@ const styles = StyleSheet.create({
     },
     scrollview_container: {
         flex: 1
+    },
+    image_container: {
+        backgroundColor: 'green', 
+        height: 200, 
+        flex:1
+    },
+    description_container :{
+        backgroundColor: 'grey', 
+        fontSize: 14, 
+        margin: 5, 
+        marginBottom: 20,  
+        fontStyle: 'italic', 
+        flex:1
+    }, 
+    title_container: {
+        backgroundColor: 'red', 
+        fontSize: 30, 
+        textAlign: 'center', 
+        fontWeight: '600', 
+        margin: 10, flex: 1
+    },
+    informations_container: {
+        backgroundColor: 'pink', 
+        fontSize: 16, 
+        margin: 5, 
+        fontWeight: '600',  
+        flex:1
     }
 })
 
