@@ -24,7 +24,7 @@ class Search extends React.Component {
     }
 
     render() {
-        console.log("Render");
+        console.log(this.state);
         return (
             <View style={styles.main_container}>
                 <TextInput onChangeText={(text) => this._searchTextInputChanged(text)} style={styles.textinput} placeholder="Titre du film"></TextInput>
