@@ -16,22 +16,20 @@ class Search extends React.Component {
         this.totalPages = 0
         this.searchedText = ""
     }
-
     _loadFilms() {
-        this.setState({ isLoading: true })
         if (this.searchedText.length > 0) {
-            getFilmsFromApiWithSearchedText(this.searchedText, this.page + 1).then(data => 
-                {
-                    this.page = data.page
-                    this.totalPages = data.totalPages
-                    this.setState({
-                        films: [ ...this.state.films, ...data.results],
-                        isLoading: false
-                    })
-                 }
-            )
+          this.setState({ isLoading: true })
+          getFilmsFromApiWithSearchedText(this.searchedText, this.page+1).then(data => {
+              this.page = data.page
+              this.totalPages = data.total_pages
+              this.setState({
+                films: [ ...this.state.films, ...data.results ],
+                isLoading: false
+              })
+          })
         }
-    }
+      }
+    
     _dispalyLoading() {
         if (this.state.isLoading) {
             return (
@@ -46,12 +44,22 @@ class Search extends React.Component {
         this.searchedText = text
     }
 
+    _searchFilms() {
+        this.page = 0
+        this.totalPages = 0
+        this.setState({
+            films: []
+        }, () => {
+            this._loadFilms()
+        })
+    } 
+
     render() {
         console.log(this.state.isLoading);
         return (
             <View style={styles.main_container}>
-                <TextInput onSubmitEditing={() => this._loadFilms()} onChangeText={(text) => this._searchTextInputChanged(text)} style={styles.textinput} placeholder="Titre du film"></TextInput>
-                <Button style={{ height: 50 }} title="Rechercher" onPress={() => this._loadFilms()} />
+                <TextInput onSubmitEditing={() => this._searchFilms()} onChangeText={(text) => this._searchTextInputChanged(text)} style={styles.textinput} placeholder="Titre du film"></TextInput>
+                <Button style={{ height: 50 }} title="Rechercher" onPress={() => this._searchFilms()} />
                 <FlatList
                     data={this.state.films}
                     keyExtractor={(item) => item.id.toString()}
