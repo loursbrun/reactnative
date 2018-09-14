@@ -50,6 +50,12 @@ class Search extends React.Component {
                 <FlatList
                     data={this.state.films}
                     keyExtractor={(item) => item.id.toString()}
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() => {
+                        if((this.state.films.length > 0)){
+                            console.log("cg")
+                        }
+                    }}
                     renderItem={({ item }) => <FilmItem film={item} />}
                 />
                 {this._dispalyLoading()}
