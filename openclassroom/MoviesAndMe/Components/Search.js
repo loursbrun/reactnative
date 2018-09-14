@@ -16,6 +16,11 @@ class Search extends React.Component {
         this.totalPages = 0
         this.searchedText = ""
     }
+
+    _displayDetailForFilm = (idFilm) => {
+        console.log("idFilm: " + idFilm);
+    } 
+
     _loadFilms() {
         if (this.searchedText.length > 0) {
           this.setState({ isLoading: true })
@@ -69,7 +74,7 @@ class Search extends React.Component {
                             this._loadFilms()
                         }
                     }}
-                    renderItem={({ item }) => <FilmItem film={item} />}
+                    renderItem={({ item }) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm} />}
                 />
                 {this._dispalyLoading()}
             </View>
@@ -79,7 +84,6 @@ class Search extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        marginTop: 20,
         flex: 1
     },
     textinput: {
