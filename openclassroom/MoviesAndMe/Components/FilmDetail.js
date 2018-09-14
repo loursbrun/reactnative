@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Image, ActivityIndicator, ScrollView } from 'react-native'
 import { getFilmDetailFromApi } from '../API/TMDBAApi'
+import { getImageFromApi } from '../API/TMDBAApi'
 
 class FilmDetail extends React.Component {
 
@@ -28,7 +29,10 @@ class FilmDetail extends React.Component {
         if (film != undefined) {
             return (
                 <ScrollView style={styles.scrollview_container}>
-               <View style={ styles.image_container }></View>
+                    <Image
+                        style={ styles.image_container }
+                        source={{uri: getImageFromApi(film.backdrop_path)}}
+                    />
                     <Text style={ styles.title_container }>{film.title}</Text>
                     <Text style={ styles.description_container }>{film.overview}</Text>
                     <Text style={ styles.informations_container }>Sortie le {film.release_date}</Text>
@@ -66,6 +70,7 @@ class FilmDetail extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
+        margin: 5
     },
     loading_container: {
         position: 'absolute',
@@ -80,12 +85,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image_container: {
-        backgroundColor: 'green', 
         height: 200, 
         flex:1
     },
-    description_container :{
-        backgroundColor: 'grey', 
+    description_container :{ 
         fontSize: 14, 
         margin: 5, 
         marginBottom: 20,  
@@ -93,14 +96,12 @@ const styles = StyleSheet.create({
         flex:1
     }, 
     title_container: {
-        backgroundColor: 'red', 
         fontSize: 30, 
         textAlign: 'center', 
         fontWeight: '600', 
         margin: 10, flex: 1
     },
     informations_container: {
-        backgroundColor: 'pink', 
         fontSize: 16, 
         margin: 5, 
         fontWeight: '600',  
