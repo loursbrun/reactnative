@@ -14,6 +14,7 @@ class FilmDetail extends React.Component {
 
     componentDidMount() {
         console.log("didMount")
+        console.log(data)
         getFilmDetailFromApi(this.props.navigation.state.params.idFilm).then(data => {
             this.setState({
                 film: data,
@@ -29,12 +30,12 @@ class FilmDetail extends React.Component {
                 <ScrollView style={styles.scrollview_container}>
                <View style={ styles.image_container }></View>
                     <Text style={ styles.title_container }>{film.title}</Text>
-                    <Text style={ styles.description_container }>Description description description description description description description description description description description </Text>
-                    <Text style={ styles.informations_container }>Sortie le 25/05/1977</Text>
-                    <Text style={ styles.informations_container }>Note : 8.1/10</Text>
-                    <Text style={ styles.informations_container }>Nombre de votes: 8848</Text>
-                    <Text style={ styles.informations_container }>Budget: 11,000,000 $</Text>
-                    <Text style={ styles.informations_container }>Genre(s) : Aventure / Action / Science-Fiction</Text>
+                    <Text style={ styles.description_container }>{film.overview}</Text>
+                    <Text style={ styles.informations_container }>Sortie le {film.release_date}</Text>
+                    <Text style={ styles.informations_container }>Note : {film.vote_average}/10</Text>
+                    <Text style={ styles.informations_container }>Nombre de votes: {film.id}</Text>
+                    <Text style={ styles.informations_container }>Budget: {film.budget} $</Text>
+                    <Text style={ styles.informations_container }>Genre(s) : {film.genres[0].name}</Text>
                 </ScrollView>
             )
         }

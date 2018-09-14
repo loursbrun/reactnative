@@ -17,3 +17,12 @@ export function getFilmDetailFromApi (id) {
     .then((response) => response.json())
     .catch((error) => console.error(error));
 }
+
+
+// Get price of movie
+// https://api.themoviedb.org/3/movie/181808?api_key=b520ccdc2ea0de41e4f6a93e4e6cc089
+export function getFilmPriceFromApi (id) {
+  return fetch('https://api.themoviedb.org/3/movie/' + id + '?api_key=' + API_TOKEN + '&language=fr')
+    .then((response) => response.json())
+    .catch((error) => console.error(error));
+}
