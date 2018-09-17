@@ -3,9 +3,24 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi'
+import { connect } from 'react-redux'
+
 
 class FilmItem extends React.Component {
+  
+
+  _displayFavoriteImage() {
+    console.log("******" + this.props.isFilmFavorite)
+    if (this.props.isFilmFavorite) 
+    return (
+      <Image style={styles.icon_fav} source={require('../Images/ic_favorite.png')} />
+    )
+    
+}
+
+
   render() {
+    
     const { film, displayDetailForFilm } = this.props
     return (
       <TouchableOpacity 
@@ -17,7 +32,7 @@ class FilmItem extends React.Component {
         />
         <View style={styles.content_container}>
           <View style={styles.header_container}>
-            <Image style={styles.icon_fav} source={require('../Images/ic_favorite.png')} />
+            {this._displayFavoriteImage()}
             <Text style={styles.title_text}>{film.title}</Text>
             <Text style={styles.vote_text}>{film.vote_average}</Text>
           </View>
@@ -86,4 +101,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FilmItem
+//export default FilmItem
+
+
+const mapStateToProps = (state) => {
+  return {
+      favoritesFilm: state.favoritesFilm
+  }
+}
+export default connect(mapStateToProps)(FilmItem)
+

@@ -26,7 +26,7 @@ class FilmDetail extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.favoritesFilm);
+       // console.log(this.props.favoritesFilm);
     }
 
     _displayLoading() {
@@ -93,7 +93,7 @@ class FilmDetail extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        //console.log(this.props)
         return (
             <View style={styles.main_container}>
                 {this._displayLoading()}
