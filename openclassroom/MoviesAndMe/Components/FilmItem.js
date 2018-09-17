@@ -17,6 +17,7 @@ class FilmItem extends React.Component {
         />
         <View style={styles.content_container}>
           <View style={styles.header_container}>
+            <Image style={styles.icon_fav} source={require('../Images/ic_favorite.png')} />
             <Text style={styles.title_text}>{film.title}</Text>
             <Text style={styles.vote_text}>{film.vote_average}</Text>
           </View>
@@ -51,6 +52,11 @@ const styles = StyleSheet.create({
   header_container: {
     flex: 3,
     flexDirection: 'row'
+  },
+  icon_fav: {
+    width: 30,
+    height: 30,
+    marginRight: 2
   },
   title_text: {
     fontWeight: 'bold',
