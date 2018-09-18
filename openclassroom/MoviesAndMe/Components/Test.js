@@ -1,15 +1,32 @@
 // Components/Test.js
 
 import React from 'react'
-import { StyleSheet, View, Platform } from 'react-native'
-import HelloWorld from './HelloWorld'
+import { StyleSheet, View, Animated } from 'react-native'
 
 class Test extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      topPosition: new Animated.Value(0)
+    }
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      this.state.topPosition, 
+      {
+        toValue: 100,
+        duration: 3000
+      }
+    ).start()
+  }
 
   render() {
     return (
       <View style={styles.main_container}>
-          <HelloWorld />
+        <Animated.View style={[styles.animation_view , {top: this.state.topPosition}]}>
+        </Animated.View>
       </View>
     )
   }
@@ -21,19 +38,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  subview_container: {
-      width: 50,
-      height: 50,
-    backgroundColor: Platform.OS === 'ios' ? 'red' : 'blue',
-    ...Platform.select({
-        ios: {
-            backgroundColor: 'green'
-        },
-        android: {
-            backgroundColor: 'blue'
-        }
-    })
-
+  animation_view: {
+    backgroundColor: 'red',
+    width: 100,
+    height: 100
   }
 })
 
