@@ -12,6 +12,7 @@ class FilmList extends React.Component {
     this.state = {
       films: []
     }
+    
   }
 
   _displayDetailForFilm = (idFilm) => {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    favoritesFilm: state.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm
   }
 }
 
