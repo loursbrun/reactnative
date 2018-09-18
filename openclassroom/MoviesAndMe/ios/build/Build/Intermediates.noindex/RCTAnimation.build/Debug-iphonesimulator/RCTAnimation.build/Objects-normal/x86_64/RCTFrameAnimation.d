@@ -1,0 +1,20 @@
+dependencies: \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTFrameAnimation.m \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTFrameAnimation.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/RCTAnimationUtils.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
+  /works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h
