@@ -1,0 +1,4 @@
+#Tue Sep 18 16:33:53 CEST 2018
+base.0=/works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/works/perso/reactnative/reactnative/openclassroom/MoviesAndMe/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
