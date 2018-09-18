@@ -63,6 +63,7 @@ class Search extends React.Component {
   }
 
   render() {
+    console.log('TEST')
     return (
       <View style={styles.main_container}>
         <TextInput
