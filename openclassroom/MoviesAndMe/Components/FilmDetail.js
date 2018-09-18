@@ -8,12 +8,33 @@ import numeral from 'numeral'
 import { connect } from 'react-redux'
 
 class FilmDetail extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    // On accède à la fonction shareFilm et au film via les paramètres qu'on a ajouté à la navigation
+    if (params.film != undefined && Platform.OS === 'ios') {
+      return {
+        // On a besoin d'afficher une image, il faut donc passe par une Touchable une fois de plus
+        headerRight: <TouchableOpacity
+          style={styles.share_touchable_headerrightbutton}
+          onPress={() => params.shareFilm()}>
+          <Image
+            style={styles.share_image}
+            source={require('../Images/ic_share.png')} />
+        </TouchableOpacity>
+      }
+    }
+  }
+
+
   constructor(props) {
     super(props)
     this.state = {
       film: undefined,
       isLoading: false
     }
+     // Ne pas oublier de binder la fonction _shareFilm sinon, lorsqu'on va l'appeler depuis le headerRight de la navigation, this.state.film sera undefined et fera planter l'application
+     this._shareFilm = this._shareFilm.bind(this)
   }
 
   componentDidMount() {
@@ -49,7 +70,7 @@ class FilmDetail extends React.Component {
         </TouchableOpacity>
       )
     }
-}
+  }
 
   _shareFilm() {
     const { film } = this.state
@@ -59,7 +80,7 @@ class FilmDetail extends React.Component {
           'Succès',
           'Film partagé',
           [
-            {text: 'OK', onPress: () => {}},
+            { text: 'OK', onPress: () => { } },
           ]
         )
       )
@@ -68,11 +89,39 @@ class FilmDetail extends React.Component {
           'Echec',
           'Film non partagé',
           [
-            {text: 'OK', onPress: () => {}},
+            { text: 'OK', onPress: () => { } },
           ]
         )
       )
-}
+  }
+
+   // Fonction pour faire passer la fonction _shareFilm et le film aux paramètres de la navigation. Ainsi on aura accès à ces données au moment de définir le headerRight
+   _updateNavigationParams() {
+    this.props.navigation.setParams({
+      shareFilm: this._shareFilm,
+      film: this.state.film
+    })
+  }
+  
+  
+  // Dès que le film est chargé, on met à jour les paramètres de la navigation (avec la fonction _updateNavigationParams) pour afficher le bouton de partage
+  componentDidMount() {
+    const favoriteFilmIndex = this.props.favoritesFilm.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+    if (favoriteFilmIndex !== -1) { 
+      this.setState({
+        film: this.props.favoritesFilm[favoriteFilmIndex]
+      }, () => { this._updateNavigationParams() })
+      return
+    }
+    
+    this.setState({ isLoading: true })
+    getFilmDetailFromApi(this.props.navigation.state.params.idFilm).then(data => {
+      this.setState({
+        film: data,
+        isLoading: false
+      }, () => { this._updateNavigationParams() })
+    })
+  }
 
   _displayLoading() {
     if (this.state.isLoading) {
@@ -110,7 +159,7 @@ class FilmDetail extends React.Component {
         <ScrollView style={styles.scrollview_container}>
           <Image
             style={styles.image}
-            source={{uri: getImageFromApi(film.backdrop_path)}}
+            source={{ uri: getImageFromApi(film.backdrop_path) }}
           />
           <Text style={styles.title_text}>{film.title}</Text>
           <TouchableOpacity
@@ -123,13 +172,13 @@ class FilmDetail extends React.Component {
           <Text style={styles.default_text}>Note : {film.vote_average} / 10</Text>
           <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
           <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0,0[.]00 $')}</Text>
-          <Text style={styles.default_text}>Genre(s) : {film.genres.map(function(genre){
-              return genre.name;
-            }).join(" / ")}
+          <Text style={styles.default_text}>Genre(s) : {film.genres.map(function (genre) {
+            return genre.name;
+          }).join(" / ")}
           </Text>
-          <Text style={styles.default_text}>Companie(s) : {film.production_companies.map(function(company){
-              return company.name;
-            }).join(" / ")}
+          <Text style={styles.default_text}>Companie(s) : {film.production_companies.map(function (company) {
+            return company.name;
+          }).join(" / ")}
           </Text>
         </ScrollView>
       )
@@ -188,7 +237,7 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 15
   },
-  default_text: {
+  default_text:  {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
@@ -211,6 +260,9 @@ const styles = StyleSheet.create({
   share_image: {
     width: 30,
     height: 30
+  },
+  share_touchable_headerrightbutton: {
+    marginRight: 8
   }
 })
 
