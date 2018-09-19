@@ -4,6 +4,7 @@ import React from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import Search from '../Components/Search'
+import New from '../Components/New'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 import Test from '../Components/Test'
@@ -13,6 +14,18 @@ const SearchStackNavigator = createStackNavigator({
         screen: Search,
         navigationOptions: {
             title: 'Rechercher'
+        }
+    },
+    FilmDetail: {
+        screen: FilmDetail
+    }
+})
+
+const NewStackNavigator = createStackNavigator({
+    New: {
+        screen: New,
+        navigationOptions: {
+            title: 'New'
         }
     },
     FilmDetail: {
@@ -56,7 +69,17 @@ const MoviesTabNavigator = createBottomTabNavigator(
                         style={styles.icon} />
                 }
             }
-        }
+        },
+        New: {
+            screen: NewStackNavigator,
+            navigationOptions: {
+                tabBarIcon: () => {
+                    return <Image
+                        source={require('../Images/ic_fiber_new.png')}
+                        style={styles.icon} />
+                }
+            }
+        },
     },
     {
         tabBarOptions: {
