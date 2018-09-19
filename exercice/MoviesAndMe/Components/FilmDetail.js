@@ -33,6 +33,7 @@ class FilmDetail extends React.Component {
     }
 
     this._toggleFavorite = this._toggleFavorite.bind(this)
+    this._toggleSeen = this._toggleSeen.bind(this)
     this._shareFilm = this._shareFilm.bind(this)
   }
 
@@ -75,6 +76,11 @@ class FilmDetail extends React.Component {
 
   _toggleFavorite() {
     const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
+    this.props.dispatch(action)
+  }
+
+  _toggleSeen() {
+    const action = { type: "TOGGLE_SEEN", value: this.state.film }
     this.props.dispatch(action)
   }
 
@@ -128,7 +134,7 @@ class FilmDetail extends React.Component {
           </ScrollView>
           <TouchableOpacity
             style={styles.seen_button}
-            onPress={() => this._toggleFavorite()}>
+            onPress={() => this._toggleSeen()}>
             <Text style={styles.seen_text_button}>MARQUER COMME VU</Text>
           </TouchableOpacity>
         </View>
@@ -271,7 +277,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm,
+    seenFilm: state.toggleSeen.seenFilm
   }
 }
 
