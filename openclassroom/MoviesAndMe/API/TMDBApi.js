@@ -26,3 +26,13 @@ export function getFilmPriceFromApi (id) {
     .then((response) => response.json())
     .catch((error) => console.error(error));
 }
+
+
+// Récupére la liste des films les plus populaires
+export function getTopRatedFilmsFromApiWithSearchedText () {
+  // https://api.themoviedb.org/3/movie/top_rated?api_key=b520ccdc2ea0de41e4f6a93e4e6cc089&language=en-US&page=1
+  const url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=' + API_TOKEN + '&language=en-US&page=1'
+  return fetch(url)
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}

@@ -4,15 +4,13 @@ import React from 'react'
 import { StyleSheet, View, TextInput, Button, Text, FlatList, ActivityIndicator } from 'react-native'
 import FilmItem from './FilmItem'
 import FilmList from './FilmList'
-import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi'
+import { getTopRatedFilmsFromApiWithSearchedText } from '../API/TMDBApi'
 
 class New extends React.Component {
 
   constructor(props) {
     super(props)
     this.searchedText = ""
-    this.page = 0
-    this.totalPages = 0
     this.state = {
       films: [],
       isLoading: false
@@ -22,9 +20,7 @@ class New extends React.Component {
   _loadFilms() {
     if (this.searchedText.length > 0) {
       this.setState({ isLoading: true })
-      getFilmsFromApiWithSearchedText(this.searchedText, this.page+1).then(data => {
-          this.page = data.page
-          this.totalPages = data.total_pages
+      getTopRatedFilmsFromApiWithSearchedText().then(data => {
           this.setState({
             films: [ ...this.state.films, ...data.results ],
             isLoading: false
@@ -38,8 +34,6 @@ class New extends React.Component {
   }
 
   _searchFilms() {
-    this.page = 0
-    this.totalPages = 0
     this.setState({
       films: [],
     }, () => {
@@ -77,8 +71,6 @@ class New extends React.Component {
           films={this.state.films}
           navigation={this.props.navigation}
           loadFilms={this._loadFilms}
-          page={this.page}
-          totalPages={this.totalPages}
           favoriteList={false} // Ici j'ai simplement ajouté un booléen à false pour indiquer qu'on n'est pas dans le cas de l'affichage de la liste des films favoris. Et ainsi pouvoir déclencher le chargement de plus de films lorsque l'utilisateur scrolle.
         />
         {this._displayLoading()}
