@@ -21,17 +21,37 @@ class FilmItem extends React.Component {
     }
   }
 
+  _showDateOfFilm(film) {
+    console.log("Date ID is: " + film)
+    return (
+      <TouchableOpacity
+        style={styles.main_container_seen}
+        onPress={() => displayDetailForFilm(film.id)}
+        onLongPress={() => this._showDateOfFilm(film.id)}>
+        <Image
+          style={styles.image_seen}
+          source={{ uri: getImageFromApi(film.poster_path) }}
+        />
+        <View style={styles.content_container}>
+          <View style={styles.header_container}>
+            <Text style={styles.title_text_seen}>Toto</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   _displayFavoritView({ film, displayDetailForFilm }) {
     console.log("********")
     console.log(this.props.navigation.state.routeName)
-    if(this.props.navigation.state.routeName === 'News') {
-    return (
-      <TouchableOpacity
+    if (this.props.navigation.state.routeName === 'News') {
+      return (
+        <TouchableOpacity
           style={styles.main_container}
           onPress={() => displayDetailForFilm(film.id)}>
           <Image
             style={styles.image}
-            source={{uri: getImageFromApi(film.poster_path)}}
+            source={{ uri: getImageFromApi(film.poster_path) }}
           />
           <View style={styles.content_container}>
             <View style={styles.header_container}>
@@ -47,23 +67,26 @@ class FilmItem extends React.Component {
             </View>
           </View>
         </TouchableOpacity>
-    ) } 
+      )
+    }
     else if (this.props.navigation.state.routeName === 'Seens') {
       return (
         <TouchableOpacity
-            style={styles.main_container_seen}
-            onPress={() => displayDetailForFilm(film.id)}>
-            <Image
-              style={styles.image_seen}
-              source={{uri: getImageFromApi(film.poster_path)}}
-            />
-            <View style={styles.content_container}>
-              <View style={styles.header_container}>
-                <Text style={styles.title_text_seen}>{film.title}</Text>
-              </View>
+          style={styles.main_container_seen}
+          onPress={() => displayDetailForFilm(film.id)}
+          onLongPress={() => this._showDateOfFilm(film)}>
+          <Image
+            style={styles.image_seen}
+            source={{ uri: getImageFromApi(film.poster_path) }}
+          />
+          <View style={styles.content_container}>
+            <View style={styles.header_container}>
+              <Text style={styles.title_text_seen}>{film.title}</Text>
             </View>
-          </TouchableOpacity>
-      ) } 
+          </View>
+        </TouchableOpacity>
+      )
+    }
   }
 
 
@@ -71,7 +94,7 @@ class FilmItem extends React.Component {
     const { film, displayDetailForFilm } = this.props
     return (
       <FadeIn>
-       {this._displayFavoritView({ film, displayDetailForFilm })}
+        {this._displayFavoritView({ film, displayDetailForFilm })}
       </FadeIn>
     )
   }
@@ -116,9 +139,9 @@ const styles = StyleSheet.create({
   title_text_seen: {
     fontSize: 16,
     flex: 1,
-    alignSelf:'center',
-    justifyContent:'center',
-    alignItems:'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 10,
     marginRight: 5
   },
