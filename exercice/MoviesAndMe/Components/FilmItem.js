@@ -51,23 +51,15 @@ class FilmItem extends React.Component {
     else if (this.props.navigation.state.routeName === 'Seens') {
       return (
         <TouchableOpacity
-            style={styles.main_container}
+            style={styles.main_container_seen}
             onPress={() => displayDetailForFilm(film.id)}>
             <Image
-              style={styles.image}
+              style={styles.image_seen}
               source={{uri: getImageFromApi(film.poster_path)}}
             />
             <View style={styles.content_container}>
               <View style={styles.header_container}>
-                {this._displayFavoriteImage()}
-                <Text style={styles.title_text}>{film.title}</Text>
-               
-              </View>
-              <View style={styles.description_container}>
-                <Text style={styles.description_text} numberOfLines={6}>{film.overview}</Text>
-              </View>
-              <View style={styles.date_container}>
-                <Text style={styles.date_text}>Sorti le 13/12/2017</Text>
+                <Text style={styles.title_text_seen}>{film.title}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -90,10 +82,21 @@ const styles = StyleSheet.create({
     height: 190,
     flexDirection: 'row'
   },
+  main_container_seen: {
+    height: 100,
+    flexDirection: 'row',
+    marginTop: 10
+  },
   image: {
     width: 120,
     height: 180,
     margin: 5
+  },
+  image_seen: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    margin: 10
   },
   content_container: {
     flex: 1,
@@ -109,6 +112,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     paddingRight: 5
+  },
+  title_text_seen: {
+    fontSize: 16,
+    flex: 1,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop: 10,
+    marginRight: 5
   },
   vote_text: {
     fontWeight: 'bold',
