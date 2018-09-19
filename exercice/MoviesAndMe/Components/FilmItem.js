@@ -39,7 +39,25 @@ class FilmItem extends React.Component {
   }
 
   _displayFavoritView({ film, displayDetailForFilm }) {
-    if (this.props.navigation.state.routeName === 'News') {
+     if (this.props.navigation.state.routeName === 'Seens') {
+      return (
+        <TouchableOpacity
+          style={styles.main_container_seen}
+          onPress={() => displayDetailForFilm(film.id)}
+          onLongPress={() => this.updateText(film)}>
+          <Image
+            style={styles.image_seen}
+            source={{ uri: getImageFromApi(film.poster_path) }}
+          />
+          <View style={styles.content_container}>
+            <View style={styles.header_container}>
+              <Text style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+    else {
       return (
         <TouchableOpacity
           style={styles.main_container}
@@ -64,24 +82,7 @@ class FilmItem extends React.Component {
         </TouchableOpacity>
       )
     }
-    else if (this.props.navigation.state.routeName === 'Seens') {
-      return (
-        <TouchableOpacity
-          style={styles.main_container_seen}
-          onPress={() => displayDetailForFilm(film.id)}
-          onLongPress={() => this.updateText(film)}>
-          <Image
-            style={styles.image_seen}
-            source={{ uri: getImageFromApi(film.poster_path) }}
-          />
-          <View style={styles.content_container}>
-            <View style={styles.header_container}>
-              <Text style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      )
-    }
+    
   }
 
   render() {
