@@ -15,32 +15,21 @@ class New extends React.Component {
       films: [],
       isLoading: false
     }
+    getTopRatedFilmsFromApiWithSearchedText().then(data => {
+        this.setState({
+          films: [ ...this.state.films, ...data.results ],
+          isLoading: false
+        })
+    })
   }
 
-  _loadFilms() {
-    if (this.searchedText.length > 0) {
-      this.setState({ isLoading: true })
-      getTopRatedFilmsFromApiWithSearchedText().then(data => {
-          this.setState({
-            films: [ ...this.state.films, ...data.results ],
-            isLoading: false
-          })
-      })
-    }
-  }
+ 
 
   _searchTextInputChanged(text) {
     this.searchedText = text
   }
 
-  _searchFilms() {
-    this.setState({
-      films: [],
-    }, () => {
-        this._loadFilms()
-    })
-  }
-
+ 
   _displayDetailForFilm = (idFilm) => {
     console.log("Display film with id " + idFilm)
     this.props.navigation.navigate("FilmDetail", { idFilm: idFilm })
@@ -53,24 +42,17 @@ class New extends React.Component {
           <ActivityIndicator size='large' />
         </View>
       )
-    }
+    } 
   }
 
   render() {
-    console.log('TEST')
+      
     return (
       <View style={styles.main_container}>
-        <TextInput
-          style={styles.textinput}
-          placeholder='Titre du film'
-          onChangeText={(text) => this._searchTextInputChanged(text)}
-          onSubmitEditing={() => this._searchFilms()}
-        />
-        <Button style={{ height: 50 }} title='Rechercher' onPress={() => this._searchFilms()}/>
+       
         <FilmList
           films={this.state.films}
           navigation={this.props.navigation}
-          loadFilms={this._loadFilms}
           favoriteList={false} // Ici j'ai simplement ajouté un booléen à false pour indiquer qu'on n'est pas dans le cas de l'affichage de la liste des films favoris. Et ainsi pouvoir déclencher le chargement de plus de films lorsque l'utilisateur scrolle.
         />
         {this._displayLoading()}
