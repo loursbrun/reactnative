@@ -56,7 +56,7 @@ class FilmItem extends React.Component {
           />
           <View style={styles.content_container}>
             <View style={styles.header_container}>
-              <Text style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
+              <Text selectable={false} style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
             </View>
           </View>
         </TouchableOpacity>
