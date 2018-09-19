@@ -9,6 +9,14 @@ import SeenItem from './SeenItem'
 
 class FilmItem extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentText: 'xxxxxxxxx',
+      titleIsDate: false
+    }
+  }
+
   _displayFavoriteImage() {
     if (this.props.isFilmFavorite) {
       // Si la props isFilmFavorite vaut true, on affiche le 🖤
@@ -21,29 +29,16 @@ class FilmItem extends React.Component {
     }
   }
 
-  _showDateOfFilm(film) {
-    console.log("Date ID is: " + film)
-    return (
-      <TouchableOpacity
-        style={styles.main_container_seen}
-        onPress={() => displayDetailForFilm(film.id)}
-        onLongPress={() => this._showDateOfFilm(film.id)}>
-        <Image
-          style={styles.image_seen}
-          source={{ uri: getImageFromApi(film.poster_path) }}
-        />
-        <View style={styles.content_container}>
-          <View style={styles.header_container}>
-            <Text style={styles.title_text_seen}>Toto</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    )
+  updateText = (film) => {
+    if(this.state.currentText !== film.title) {
+      this.setState({currentText: film.title})
+    } 
+    else if(this.state.currentText === film.title) {
+      this.setState({currentText: film.id})
+    } 
   }
 
   _displayFavoritView({ film, displayDetailForFilm }) {
-    console.log("********")
-    console.log(this.props.navigation.state.routeName)
     if (this.props.navigation.state.routeName === 'News') {
       return (
         <TouchableOpacity
@@ -74,21 +69,20 @@ class FilmItem extends React.Component {
         <TouchableOpacity
           style={styles.main_container_seen}
           onPress={() => displayDetailForFilm(film.id)}
-          onLongPress={() => this._showDateOfFilm(film)}>
+          onLongPress={() => this.updateText(film)}>
           <Image
             style={styles.image_seen}
             source={{ uri: getImageFromApi(film.poster_path) }}
           />
           <View style={styles.content_container}>
             <View style={styles.header_container}>
-              <Text style={styles.title_text_seen}>{film.title}</Text>
+              <Text style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
             </View>
           </View>
         </TouchableOpacity>
       )
     }
   }
-
 
   render() {
     const { film, displayDetailForFilm } = this.props
