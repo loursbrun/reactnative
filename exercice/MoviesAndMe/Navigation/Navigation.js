@@ -90,7 +90,7 @@ const MoviesTabNavigator = createBottomTabNavigator(
       }
     },
     Seen: {
-      screen: NewsStackNavigator,
+      screen: SeenStackNavigator,
       navigationOptions: {
         tabBarIcon: () => {
           return <Image
