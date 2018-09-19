@@ -5,7 +5,6 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi'
 import FadeIn from '../Animations/FadeIn'
 import moment from 'moment'
-import SeenItem from './SeenItem'
 
 
 class FilmItem extends React.Component {
@@ -56,7 +55,11 @@ class FilmItem extends React.Component {
           />
           <View style={styles.content_container}>
             <View style={styles.header_container}>
-              <Text selectable={false} style={styles.title_text_seen} onLongPress={() => this.updateText(film)}>{this.state.currentText}</Text>
+              <Text  selectable={false} 
+              style={styles.title_text_seen} 
+              onLongPress={() => this.updateText(film)}
+              onPress={() => displayDetailForFilm(film.id)}>
+              {this.state.currentText}</Text>
             </View>
           </View>
         </TouchableOpacity>
