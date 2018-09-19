@@ -38,7 +38,7 @@ class FilmItem extends React.Component {
       this.setState({currentText: film.title})
     } 
     else if(this.state.currentText === film.title) {
-      this.setState({currentText: moment(new Date(film.release_date)).format('DD/MM/YYYY')})
+      this.setState({currentText: 'Sorti le ' + moment(new Date(film.release_date)).format('DD/MM/YYYY')})
     } 
   }
 
