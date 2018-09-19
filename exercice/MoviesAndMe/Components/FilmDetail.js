@@ -11,18 +11,18 @@ import EnlargeShrink from '../Animations/EnlargeShrink'
 class FilmDetail extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
-      const { params } = navigation.state
-      if (params.film != undefined && Platform.OS === 'ios') {
-        return {
-            headerRight: <TouchableOpacity
-                            style={styles.share_touchable_headerrightbutton}
-                            onPress={() => params.shareFilm()}>
-                            <Image
-                              style={styles.share_image}
-                              source={require('../Images/ic_share.png')} />
-                          </TouchableOpacity>
-        }
+    const { params } = navigation.state
+    if (params.film != undefined && Platform.OS === 'ios') {
+      return {
+        headerRight: <TouchableOpacity
+          style={styles.share_touchable_headerrightbutton}
+          onPress={() => params.shareFilm()}>
+          <Image
+            style={styles.share_image}
+            source={require('../Images/ic_share.png')} />
+        </TouchableOpacity>
       }
+    }
   }
 
   constructor(props) {
@@ -69,6 +69,10 @@ class FilmDetail extends React.Component {
     }
   }
 
+  _seenButtonAction() {
+  console.log("Seen Action")
+  }
+
   _toggleFavorite() {
     const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
     this.props.dispatch(action)
@@ -96,31 +100,38 @@ class FilmDetail extends React.Component {
     const { film } = this.state
     if (film != undefined) {
       return (
-        <ScrollView style={styles.scrollview_container}>
-          <Image
-            style={styles.image}
-            source={{uri: getImageFromApi(film.backdrop_path)}}
-          />
-          <Text style={styles.title_text}>{film.title}</Text>
-          <TouchableOpacity
+        <View style={styles.main_container}>
+          <ScrollView style={styles.scrollview_container}>
+            <Image
+              style={styles.image}
+              source={{ uri: getImageFromApi(film.backdrop_path) }}
+            />
+            <Text style={styles.title_text}>{film.title}</Text>
+            <TouchableOpacity
               style={styles.favorite_container}
               onPress={() => this._toggleFavorite()}>
               {this._displayFavoriteImage()}
-          </TouchableOpacity>
-          <Text style={styles.description_text}>{film.overview}</Text>
-          <Text style={styles.default_text}>Sorti le {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
-          <Text style={styles.default_text}>Note : {film.vote_average} / 10</Text>
-          <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
-          <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0,0[.]00 $')}</Text>
-          <Text style={styles.default_text}>Genre(s) : {film.genres.map(function(genre){
+            </TouchableOpacity>
+            <Text style={styles.description_text}>{film.overview}</Text>
+            <Text style={styles.default_text}>Sorti le {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
+            <Text style={styles.default_text}>Note : {film.vote_average} / 10</Text>
+            <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
+            <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0,0[.]00 $')}</Text>
+            <Text style={styles.default_text}>Genre(s) : {film.genres.map(function (genre) {
               return genre.name;
             }).join(" / ")}
-          </Text>
-          <Text style={styles.default_text}>Companie(s) : {film.production_companies.map(function(company){
+            </Text>
+            <Text style={styles.default_text}>Companie(s) : {film.production_companies.map(function (company) {
               return company.name;
             }).join(" / ")}
-          </Text>
-        </ScrollView>
+            </Text>
+          </ScrollView>
+          <TouchableOpacity
+            style={styles.seen_button}
+            onPress={() => this._toggleFavorite()}>
+            <Text style={styles.seen_text_button}>MARQUER COMME VU</Text>
+          </TouchableOpacity>
+        </View>
       )
     }
   }
@@ -133,7 +144,7 @@ class FilmDetail extends React.Component {
           'Succès',
           'Film partagé',
           [
-            {text: 'OK', onPress: () => {}},
+            { text: 'OK', onPress: () => { } },
           ]
         )
       )
@@ -142,7 +153,7 @@ class FilmDetail extends React.Component {
           'Echec',
           'Film non partagé',
           [
-            {text: 'OK', onPress: () => {}},
+            { text: 'OK', onPress: () => { } },
           ]
         )
       )
@@ -215,12 +226,12 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 15
   },
-  default_text: {
+  default_text:  {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
   },
-  favorite_image:{
+  favorite_image: {
     flex: 1,
     width: null,
     height: null
@@ -242,6 +253,19 @@ const styles = StyleSheet.create({
   share_image: {
     width: 30,
     height: 30
+  },
+  seen_button: {
+    backgroundColor: '#2196f3',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    height:30
+  },
+  seen_text_button: {
+    color: 'white',
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: "bold"
   }
 })
 

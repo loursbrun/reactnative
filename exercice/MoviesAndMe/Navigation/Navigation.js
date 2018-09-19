@@ -52,8 +52,9 @@ const SeenStackNavigator = createStackNavigator({
       title: 'Mes Films Vus',
     },
   },
-  SeenDetail: {
+  FilmDetail: {
     screen: FilmDetail,
+    title: 'Mes Films Vus'
   }
 })
 
