@@ -7,6 +7,7 @@ import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 import News from '../Components/News'
+import Seen from '../Components/Seen'
 
 const SearchStackNavigator = createStackNavigator({
   Search: {
@@ -44,6 +45,18 @@ const NewsStackNavigator = createStackNavigator({
   }
 })
 
+const SeenStackNavigator = createStackNavigator({
+  Seen: {
+    screen: Seen,
+    navigationOptions: {
+      title: 'Mes Films Vus',
+    },
+  },
+  SeenDetail: {
+    screen: FilmDetail,
+  }
+})
+
 const MoviesTabNavigator = createBottomTabNavigator(
   {
     Search: {
@@ -72,6 +85,16 @@ const MoviesTabNavigator = createBottomTabNavigator(
         tabBarIcon: () => {
           return <Image
             source={require('../Images/ic_fiber_new.png')}
+            style={styles.icon}/>
+        }
+      }
+    },
+    Seen: {
+      screen: NewsStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Images/ic_seen.png')}
             style={styles.icon}/>
         }
       }
