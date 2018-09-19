@@ -17,6 +17,10 @@ class FilmItem extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({currentText: this.props.film.title})
+  }
+
   _displayFavoriteImage() {
     if (this.props.isFilmFavorite) {
       // Si la props isFilmFavorite vaut true, on affiche le 🖤
