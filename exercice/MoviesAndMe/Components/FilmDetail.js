@@ -8,6 +8,9 @@ import numeral from 'numeral'
 import { connect } from 'react-redux'
 import EnlargeShrink from '../Animations/EnlargeShrink'
 
+
+
+
 class FilmDetail extends React.Component {
 
   static navigationOptions = ({ navigation }) => {

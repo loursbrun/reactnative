@@ -13,7 +13,7 @@ class Seens extends React.Component {
         <FilmList
           films={this.props.seenFilm}
           navigation={this.props.navigation}
-          seenList={true}
+         
         />
       </View>
     )
