@@ -69,9 +69,19 @@ class FilmDetail extends React.Component {
       )
     }
   }
-
-  _seenButtonAction() {
-  console.log("Seen Action")
+  _displaySeenTextButton() {
+    if (this.props.seenFilm.findIndex(item => item.id === this.state.film.id) !== -1) {
+      return (
+        <Text style={styles.seen_text_button}>
+          NON VU
+        </Text>
+      )
+    }
+    return (
+      <Text style={styles.seen_text_button}>
+         MARQUER COMME VU
+      </Text>
+    )
   }
 
   _toggleFavorite() {
@@ -135,7 +145,7 @@ class FilmDetail extends React.Component {
           <TouchableOpacity
             style={styles.seen_button}
             onPress={() => this._toggleSeen()}>
-            <Text style={styles.seen_text_button}>MARQUER COMME VU</Text>
+            {this._displaySeenTextButton()}
           </TouchableOpacity>
         </View>
       )
@@ -232,7 +242,7 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 15
   },
-  default_text:  {
+  default_text: {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
@@ -265,7 +275,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    height:30
+    height: 30
   },
   seen_text_button: {
     color: 'white',
