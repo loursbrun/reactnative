@@ -4,6 +4,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi'
 import FadeIn from '../Animations/FadeIn'
+import moment from 'moment'
 import SeenItem from './SeenItem'
 
 
@@ -12,7 +13,7 @@ class FilmItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentText: 'xxxxxxxxx',
+      currentText: '',
       titleIsDate: false
     }
   }
@@ -38,7 +39,7 @@ class FilmItem extends React.Component {
       this.setState({currentText: film.title})
     } 
     else if(this.state.currentText === film.title) {
-      this.setState({currentText: film.id})
+      this.setState({currentText: moment(new Date(film.release_date)).format('DD/MM/YYYY')})
     } 
   }
 
