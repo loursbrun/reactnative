@@ -7,7 +7,7 @@ import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 import News from '../Components/News'
-import Seen from '../Components/Seen'
+import Seens from '../Components/Seens'
 
 const SearchStackNavigator = createStackNavigator({
   Search: {
@@ -46,8 +46,8 @@ const NewsStackNavigator = createStackNavigator({
 })
 
 const SeenStackNavigator = createStackNavigator({
-  Seen: {
-    screen: Seen,
+  Seens: {
+    screen: Seens,
     navigationOptions: {
       title: 'Mes Films Vus',
     },

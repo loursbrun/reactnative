@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native'
 import FilmList from './FilmList'
 import { connect } from 'react-redux'
 
-class Seen extends React.Component {
+class Seens extends React.Component {
 
   render() {
     return (
@@ -32,4 +32,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Seen)
+export default connect(mapStateToProps)(Seens)
