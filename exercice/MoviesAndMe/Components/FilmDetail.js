@@ -51,6 +51,13 @@ class FilmDetail extends React.Component {
       }, () => { this._updateNavigationParams() })
       return
     }
+    const seenFilmIndex = this.props.seenFilm.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+    if (seenFilmIndex !== -1) {
+      this.setState({
+        film: this.props.seenFilm[seenFilmIndex]
+      }, () => { this._updateNavigationParams() })
+      return
+    }
     this.setState({ isLoading: true })
     getFilmDetailFromApi(this.props.navigation.state.params.idFilm).then(data => {
       this.setState({
